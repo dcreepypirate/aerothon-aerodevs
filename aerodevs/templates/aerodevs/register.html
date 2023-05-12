@@ -2,73 +2,89 @@
 <html>   
 <head>  
 <meta name="viewport" content="width=device-width, initial-scale=1">  
-<title> Login Page </title>  
+<title>Registration Page</title>  
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <style>   
-Body {  
-  font-family: Calibri, Helvetica, sans-serif;  
-  background-color: pink;  
-}  
-button {   
-       background-color: #4CAF50;   
-       width: 100%;  
-        color: orange;   
-        padding: 15px;   
-        margin: 10px 0px;   
-        border: none;   
-        cursor: pointer;   
-         }   
- form {   
-        border: 3px solid #f1f1f1;   
-    }   
- input[type=text], input[type=password] {   
-        width: 100%;   
-        margin: 8px 0;  
-        padding: 12px 20px;   
-        display: inline-block;   
-        border: 2px solid green;   
-        box-sizing: border-box;   
-    }  
- button:hover {   
-        opacity: 0.7;   
-    }   
-  .cancelbtn {   
-        width: auto;   
-        padding: 10px 18px;  
-        margin: 10px 5px;  
-    }   
-        
-     
- .container {   
-        padding: 25px;   
-        background-color: lightblue;  
-    }   
+    body {  
+        font-family: Calibri, Helvetica, sans-serif;  
+        background-color: rgb(255, 255, 255);  
+    }
+    
+    .register-form {
+        max-width: 400px;
+        margin: 0 auto;
+        background-color: rgb(173, 216, 230);
+        padding: 25px;
+        border: 3px solid #6699cc;
+        border-radius: 10px;
+        margin-top: 100px;
+    }
+
+    .register-form h1 {
+        text-align: center;
+        margin-bottom: 25px;
+        color: #6699cc;
+    }
+
+    .form-control {
+        border-color: #6699cc;
+    }
+
+    .register-btn {
+        background-color: #6699cc;
+        color: rgb(255, 255, 255);
+        width: 100%;
+        padding: 15px;
+        margin: 10px 0px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .register-btn:hover {
+        opacity: 0.7;
+    }
 </style>   
 </head>    
 <body>    
-    <center> <h1> Registration Form </h1> </center>   
-    <form action="{% url 'register' %}" method="post"> 
-        {% csrf_token %} 
-        <div class="container">   
-            <label>Username : </label>   
-            <input type="text" placeholder="Enter Username" name="username" required>  
-            <label>Email : </label>   
-            <input type="email" placeholder="Enter Email" name="email" required>  
-            <label>Password : </label>   
-            <input type="password" placeholder="Enter Password" name="password" required>
-            <label>Confirm Password : </label>   
-            <input type="password" placeholder="Confirm Password" name="confirmation" required>  
-            <button type="submit">Register</button>
-            <label for="role">Choose Role:</label>
+    <div class="register-form">
+        <h1>Registration Form</h1>
+        <form action="{% url 'register' %}" method="post"> 
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" class="form-control" id="username" placeholder="Enter Username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter Email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" id="password" placeholder="Enter Password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="confirmation">Confirm Password:</label>
+                <input type="password" class="form-control" id="confirmation" placeholder="Confirm Password" name="confirmation" required>
+            </div>
+            <div class="form-group">
+                <label for="role">Choose Role:</label>
+                <select class="form-control" name="role" id="role">
+                    <option value="M">Manufacturer</option>
+                    <option value="R">Recycler</option>
+                    <option value="A">Airline</option>
+                </select>
+            </div>
+            <button type="submit" class="register-btn">Register</button>
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="remember-me" checked>
+                <label class="form-check-label" for="remember-me">Remember me</label>
+            </div>
+            <button type="button" class="btn btn-secondary cancelbtn">Cancel</button>
+            <p class="text-center"><a href="#">Forgot password?</a></p>
+        </form>
+    </div>
 
-            <select name="role" id="role">
-              <option value="M">Manufacturer</option>
-              <option value="R">Recycler</option>
-              <option value="A">Airline</option>
-            </select>    
-            <input type="checkbox" checked="checked"> Remember me   
-            <button type="button" class="cancelbtn"> Cancel</button>   
-            Forgot <a href="#"> password? </a>   
-        </div>   
-    </form>     
+   
+  
 </body>     
 </html>  

@@ -8,9 +8,18 @@ from django.urls import reverse
 from django import forms
 from django.conf import settings
 from django.shortcuts import redirect
+from .models import Product
 
 # import models
 from .models import User
+
+def market(request):
+    product = Product.objects.all()#.order_by('-age')
+    part_name_filter = Product.objects.values_list('part_name', flat=True).distinct()
+    context = {'product': product, 'part_name_filter':part_name_filter}
+    return render(request, 'aerodevs/market .html', context)
+
+
 
 # Create your views here.
 def index(request):
@@ -22,7 +31,7 @@ def index(request):
     user = User.objects.get(username = current_user)
 
     if user.role == "M" or user.role=="R":
-        return render(request, "aerodevs/market.html")
+        return redirect(market)
         
     return render(request, "aerodevs/dashboard.html")
 
@@ -77,6 +86,5 @@ def register(request):
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "aerodevs/register.html")
-
 
 
