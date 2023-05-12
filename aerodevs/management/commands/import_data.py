@@ -11,10 +11,27 @@ class Command(BaseCommand):
 		df = pd.read_excel(my_file)
 		df = df.iloc[:21]
 		df = df[['Part Name', 'Material Composition', 'Age (years)', 
-		'Manufacturer', #'Landfill Waste Saved (kg)', 'Energy Consumption Saved (kWh)', 
-		#'Remanufacturing Potential (%)'
+		'Manufacturer',
+		'New Parts Carbon Footprint (kg CO2e)', 
+		'Recycled Parts Carbon Footprint (kg CO2e)',
+		'Energy Consumption - New Parts (kWh)',
+		'Renewable Material Content (%)',
+		'Carbon Footprint Saved (kg CO2e)',
+		'Energy Consumption Saved (kWh)',
+		'Remanufacturing Potential (%)'
 		]]
-		mapping = {'Part Name': 'part_name', 'Material Composition': 'material', 'Age (years)': 'age', 'Manufacturer':'manufacturer' #'Landfill Waste Saved (kg)':'Landfill_Waste_Saved','Energy Consumption Saved (kWh)':'Energy_Saved','Remanufacturing Potential (%)':'Remanufacturing_Potential'
+
+		mapping = {'Part Name': 'part_name', 
+		'Material Composition': 'material', 
+		'Age (years)': 'age', 
+		'Manufacturer':'manufacturer',
+		'New Parts Carbon Footprint (kg CO2e)':'New_Parts_Carbon_Footprint',
+		'Recycled Parts Carbon Footprint (kg CO2e)': 'Recycled_Parts_Carbon_Footprint',
+		'Energy Consumption - New Parts (kWh)': 'Energy_Consumption_New_Parts',
+		'Renewable Material Content (%)':'Renewable_Material_Content',
+		'Carbon Footprint Saved (kg CO2e)':'Carbon_Footprint_Saved',
+		'Energy Consumption Saved (kWh)': 'Energy_Consumption_Saved',
+		'Remanufacturing Potential (%)': 'Remanufacturing_Potential'
 		}
 		df = df.rename(columns=mapping)
 
@@ -24,8 +41,13 @@ class Command(BaseCommand):
 		for row in df.values:
 			Product_qs = Product.objects.create(part_name=row[0],
 				material=row[1], age=row[2], manufacturer=row[3],
-				#Landfill_Waste_Saved=row[4], Energy_Saved=row[5],
-				#Remanufacturing_Potential=row[6]
+				New_Parts_Carbon_Footprint =row[4],
+				Recycled_Parts_Carbon_Footprint =row[5],
+				Energy_Consumption_New_Parts =row[6],
+    			Renewable_Material_Content =row[7],
+    			Carbon_Footprint_Saved =row[8],
+    			Energy_Consumption_Saved =row[9],
+    			Remanufacturing_Potential =row[10]
 				)
 			
 		

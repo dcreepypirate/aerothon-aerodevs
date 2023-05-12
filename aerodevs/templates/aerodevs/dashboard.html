@@ -4,13 +4,15 @@
 
   <div class="dropdown">
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Filter According to
+      Part Name
     </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" href="#">Part Name</a>
-      <a class="dropdown-item" href="#">Manufacturer</a>
-      <a class="dropdown-item" href="#">Something else here</a>
-    </div>
+    {% if part_name_filter %}
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      {% for name in part_name_filter %}
+        <a class="dropdown-item" href="#">{{name}}</a>
+      {% endfor %}
+      </div>
+    {% endif %}
   </div>
 
   <!-- Page Content -->
@@ -24,6 +26,7 @@
               Material: {{pro.material}} <br/>
               Age: {{pro.age}} <br/>
               Manufacturer: {{pro.manufacturer}} <br/>
+              Remanufacturing_Potential: {{pro.Remanufacturing_Potential}}<br/> <br/>
               <a href="#" class="btn btn-primary">Buy Now</a>
             </div>
           </div>

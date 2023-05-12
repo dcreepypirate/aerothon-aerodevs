@@ -69,7 +69,12 @@ def register(request):
         return render(request, "aerodevs/register.html")
 
 def dashboard(request):
-    product = Product.objects.all().order_by('-age')
-    context = {'product': product}
-    #return render(request, 'employee_dashboard.html', context)
+    product = Product.objects.all()#.order_by('-age')
+    part_name_filter = Product.objects.values_list('part_name', flat=True).distinct()
+    context = {'product': product, 'part_name_filter':part_name_filter}
     return render(request, 'aerodevs/dashboard.html', context)
+
+#def filter(request):
+#    product = Product.objects.values_list('part_name', flat=True).distinct()
+#    context = {'part_name_filter': product}
+#    return render(request, 'aerodevs/dashboard.html', context)
