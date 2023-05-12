@@ -1,18 +1,45 @@
-<h1>Welcome to market place</h1>
-<table>
-    <tr>
-      <th>Company</th>
-      <th>Contact</th>
-      <th>Country</th>
-    </tr>
-    <tr>
-      <td>Alfreds Futterkiste</td>
-      <td>Maria Anders</td>
-      <td>Germany</td>
-    </tr>
-    <tr>
-      <td>Centro comercial Moctezuma</td>
-      <td>Francisco Chang</td>
-      <td>Mexico</td>
-    </tr>
-  </table> 
+{% extends 'aerodevs/home.html' %}
+
+{% block content %}
+
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Part Name
+  </button>
+  {% if part_name_filter %}
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    {% for name in part_name_filter %}
+    <a class="dropdown-item" href="#">{{name}}</a>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
+
+<!-- Page Content -->
+<div class="container-fluid mt-3">
+  <div class="row">
+    {% for pro in product %} 
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">
+            {{pro.part_name}}
+            {% if pro.Remanufacturing_Potential < 60 %}
+            <span class="badge badge-sm badge-success">Recycle</span>
+            {% else %}
+            <span class="badge badge-sm badge-warning">Remanufacture</span>
+            {% endif %}
+            <br/></h5>
+          Material: {{pro.material}} <br/>
+          Age: {{pro.age}}
+          Manufacturer: {{pro.manufacturer}} <br/>
+          Remanufacturing Potential: {{pro.Remanufacturing_Potential}}<br/> <br/>
+          <a href="#" class="btn btn-primary">Buy Now</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

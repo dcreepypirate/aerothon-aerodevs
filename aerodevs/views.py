@@ -10,7 +10,15 @@ from django.conf import settings
 from django.shortcuts import redirect
 from .models import Product
 from .models import User
-from django.db.models import Sum
+#from django.db.models import Sum
+
+
+def market(request):
+    product = Product.objects.all()#.order_by('-age')
+    part_name_filter = Product.objects.values_list('part_name', flat=True).distinct()
+    context = {'product': product, 'part_name_filter':part_name_filter}
+    return render(request, 'aerodevs/market.html', context)
+
 
 
 # Create your views here.
@@ -23,7 +31,7 @@ def index(request):
     user = User.objects.get(username = current_user)
 
     if user.role == "M" or user.role=="R":
-        return render(request, "aerodevs/market.html")
+        return redirect(market)
         
     return render(request, "aerodevs/dashboard.html")
 
@@ -79,10 +87,9 @@ def register(request):
     else:
         return render(request, "aerodevs/register.html")
 
-
 def dashboard(request):
     product = Product.objects.all()#.order_by('-age')
-    value = (Product.objects.aggregate(Sum('Percentage_recycled'))['Percentage_recycled__sum'])*100
+    #value = (Product.objects.aggregate(Sum('Percentage_recycled'))['Percentage_recycled__sum'])*100
     part_name_filter = Product.objects.values_list('part_name', flat=True).distinct()
     context = {'product': product, 'part_name_filter':part_name_filter, 'value':value}
     return render(request, 'aerodevs/dashboard.html', context)
