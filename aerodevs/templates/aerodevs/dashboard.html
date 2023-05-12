@@ -1,49 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-{% extends 'aerodevs/home.html' %}
-
-{% block content %}
-
-{{value}}
-
-  <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Part Name
-    </button>
-    {% if part_name_filter %}
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      {% for name in part_name_filter %}
-        <a class="dropdown-item" href="#">{{name}}</a>
-      {% endfor %}
-      </div>
-    {% endif %}
-  </div>
-
-  <!-- Page Content -->
-    {% for pro in product %}
-    <div class="container-fluid mt-3">
-      <div class="row">
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">{{pro.part_name}}</h5>
-              Material: {{pro.material}} <br/>
-              Age: {{pro.age}} <br/>
-              Manufacturer: {{pro.manufacturer}} <br/>
-              Remanufacturing_Potential: {{pro.Remanufacturing_Potential}}
-              <br/> <br/>
-              <a href="#" class="btn btn-primary">Buy Now</a>
-            </div>
-          </div>
-        </div>
-    {% endfor %}
-
-{% endblock %}
-
-=======
-<h1>Welcome to dashboard</h1>
->>>>>>> e035e483a666f3d2e7e0c7a4eeaae2c118d2cdae
-=======
 {% extends "aerodevs/layout.html" %}
 
 {% block title %} Dashboard {% endblock title %}
@@ -52,7 +6,7 @@
 {% block stylesheets %}{% endblock stylesheets %}
 
 {% block content %}
-
+<br/>
 <div class="content">
     <div class="page-inner">
         <!-- Card -->
@@ -70,7 +24,7 @@
                             <div class="col-7 col-stats">
                                 <div class="numbers">
                                     <p class="card-category">Percentage of Recycled/Repurposed </p>
-                                    <h4 class="card-title">37%</h4>
+                                    <h4 class="card-title">{{value}}%</h4>
                                 </div>
                             </div>
                         </div>
@@ -88,8 +42,8 @@
                             </div>
                             <div class="col-7 col-stats">
                                 <div class="numbers">
-                                    <p class="card-category">Sales</p>
-                                    <h4 class="card-title">$ 1,345</h4>
+                                    <p class="card-category">Number of Parts Recycled</p>
+                                    <h4 class="card-title">20</h4>
                                 </div>
                             </div>
                             
@@ -97,53 +51,36 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-md-4">
-                <div class="card card-stats card-secondary card-round">
-                    <div class="card-body ">
-                        <div class="row">
-                            <div class="col-5">
-                                <div class="icon-big text-center">
-                                    <i class="flaticon-success"></i>
-                                </div>
-                            </div>
-                            <div class="col-7 col-stats">
-                                <div class="numbers">
-                                    <p class="card-category">Order</p>
-                                    <h4 class="card-title">576</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
         </div>
 
 
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">Percentage of total recycled parts in terms of age range</div>
                     </div>
                     <div class="card-body">
                         <div class="chart-container">
-                            <canvas id="doughnutChart" style="width: 50%; height: 50%"></canvas>
+                            <canvas id="pieChart" style="width: 20%; height: 20%"></canvas>
                         </div>
                     </div>
 
                 </div>
 
                 
-
+              <div class="col-md-4">
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">Recycled percentage in terms of material</div>
                     </div>
                     <div class="card-body">
                         <div class="chart-container">
-                            <canvas id="pieChart" style="width: 50%; height: 50%"></canvas>
+                            <canvas id="myBarChart" style="width: 100%; height: 100%"></canvas>
                         </div>
                     </div>
                 </div>
+              </div>
 
                 <div class="card">
                     <div class="card-header">
@@ -174,8 +111,6 @@
         </div>
     </div>
 </div>
-
-{% endblock content %}
 
 <!-- Specific JS goes HERE -->
 {% block javascripts %}
@@ -219,11 +154,14 @@
 			}
 		});
 
+    var arr = {{array|safe}};
+    console.log(arr);
+
         var myPieChart = new Chart(pieChart, {
 			type: 'pie',
 			data: {
 				datasets: [{
-					data: [50, 35, 15, 20],
+					data: [arr],
 					backgroundColor :["#1d7af3","#f3545d","#fdaf4b", "#00FFFF"],
 					borderWidth: 0
 				}],
@@ -258,7 +196,7 @@
 			}
 		})
         
-        
+        console.log(myPieChart);
         var myMultipleBarChart = new Chart(multipleBarChart, {
 			type: 'bar',
 			data: {
@@ -305,8 +243,69 @@
 				}
 			}
 		});
-	</script>
+
+</script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Retrieve the array data from the Django template variable
+        var data = {{ array }};
+
+        // Get the canvas element
+        var canvas = document.getElementById('pieChart');
+
+        // Create the pie chart using Chart.js
+        var pieChart = new Chart(canvas, {
+            type: 'pie',
+            data: {
+                datasets: [{
+                    data: data,
+                    backgroundColor: [
+                        '#1d7af3',
+                        '#f3545d',
+                        '#fdaf4b'
+                    ]
+                }],
+                labels: ['Label 1', 'Label 2', 'Label 3']
+            },
+            options: {
+                responsive: true
+            }
+        });
+    });
+</script>
+	
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  var arrayData = {{ carbon|safe }};
+
+  var ctx = document.getElementById('myBarChart').getContext('2d');
+  var myBarChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Boeing', 'Embraer', 'Cessna', 'Gulfstream','Airbus'],
+      datasets: [{
+        label: 'Bar Chart',
+        data: arrayData,
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: 'rgba(255, 99, 132, 1)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+
 
 
 {% endblock javascripts %}
+
+{% endblock content %}
 >>>>>>> ff368c2cef502e07dead73373078bd1818d7be83
