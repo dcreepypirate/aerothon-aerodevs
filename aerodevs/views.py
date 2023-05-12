@@ -14,7 +14,17 @@ from .models import User
 
 # Create your views here.
 def index(request):
-    return HttpResponse("Hello, world.")
+
+    if not request.user.is_authenticated:
+        return redirect(login_view)
+
+    current_user = request.user
+    user = User.objects.get(username = current_user)
+
+    if user.role == "M" or user.role=="R":
+        return render(request, "aerodevs/market.html")
+        
+    return render(request, "aerodevs/dashboard.html")
 
 def login_view(request):
     if request.method == "POST":
@@ -49,6 +59,7 @@ def register(request):
         # Ensure password matches confirmation
         password = request.POST["password"]
         confirmation = request.POST["confirmation"]
+        role= request.POST["role"]
         if password != confirmation:
             return render(request, "aerodevs/register.html", {
                 "message": "Passwords must match."
@@ -56,7 +67,7 @@ def register(request):
 
         # Attempt to create new user
         try:
-            user = User.objects.create_user(username, email, password)
+            user = User.objects.create_user(username, email=email, password=password, role=role)
             user.save()
         except IntegrityError:
             return render(request, "aerodevs/register.html", {
