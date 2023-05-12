@@ -13,6 +13,10 @@ from .models import Product
 # import models
 from .models import User
 
+def home(request):
+    return render(request, "aerodevs/home.html")
+
+@login_required
 def market(request):
     product = Product.objects.all()#.order_by('-age')
     part_name_filter = Product.objects.values_list('part_name', flat=True).distinct()
@@ -20,8 +24,7 @@ def market(request):
     return render(request, 'aerodevs/market.html', context)
 
 
-
-# Create your views here.
+@login_required
 def index(request):
 
     if not request.user.is_authenticated:
@@ -33,7 +36,19 @@ def index(request):
     if user.role == "M" or user.role=="R":
         return redirect(market)
         
-    return render(request, "aerodevs/dashboard.html")
+    else:
+        return render(request, "aerodevs/dashboard.html")
+
+
+def buy(request,part_id):
+    part = Product.objects.get(part_id=part_id)
+    part.is_Sold=True
+    part.save()
+    return redirect("/market")
+
+
+
+
 
 def login_view(request):
     if request.method == "POST":
@@ -57,7 +72,7 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return HttpResponseRedirect(reverse("index"))
+    return HttpResponseRedirect(reverse("login"))
 
 
 def register(request):
