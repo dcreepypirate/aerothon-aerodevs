@@ -8,13 +8,14 @@ from django.urls import reverse
 from django import forms
 from django.conf import settings
 from django.shortcuts import redirect
+from .models import Product
 
 # import models
 from .models import User
 
 # Create your views here.
 def index(request):
-    return HttpResponse("Hello, world.")
+    return render(request, "aerodevs/home.html")
 
 def login_view(request):
     if request.method == "POST":
@@ -67,5 +68,8 @@ def register(request):
     else:
         return render(request, "aerodevs/register.html")
 
-
-
+def dashboard(request):
+    product = Product.objects.all().order_by('-age')
+    context = {'product': product}
+    #return render(request, 'employee_dashboard.html', context)
+    return render(request, 'aerodevs/dashboard.html', context)
