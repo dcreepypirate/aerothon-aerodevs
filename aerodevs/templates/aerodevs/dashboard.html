@@ -12,7 +12,7 @@
         <!-- Card -->
         <h4 class="page-title">Dashboard</h4>
         <div class="row">
-            <div class="col-sm-6 col-md-4">
+            <div class="col-md-4">
                 <div class="card card-stats card-primary card-round">
                     <div class="card-body">
                         <div class="row">
@@ -23,17 +23,17 @@
                             </div>
                             <div class="col-7 col-stats">
                                 <div class="numbers">
-                                    <p class="card-category">Percentage of Recycled/Repurposed </p>
-                                    <h4 class="card-title">{{value}}%</h4>
+                                    <p class="card-category">Percentage of Recycled/Repurposed</p>
+                                    <h4 class="card-title">{{ value }}%</h4>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-md-4">
+            <div class="col-md-4">
                 <div class="card card-stats card-success card-round">
-                    <div class="card-body ">
+                    <div class="card-body">
                         <div class="row">
                             <div class="col-5">
                                 <div class="icon-big text-center">
@@ -46,15 +46,13 @@
                                     <h4 class="card-title">20</h4>
                                 </div>
                             </div>
-                            
                         </div>
                     </div>
                 </div>
             </div>
-            
         </div>
 
-
+        <div class="row">
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-header">
@@ -62,17 +60,16 @@
                     </div>
                     <div class="card-body">
                         <div class="chart-container">
-                            <canvas id="pieChart" style="width: 20%; height: 20%"></canvas>
+                            <canvas id="pieChart" style="width: 100%; height: 100%"></canvas>
                         </div>
                     </div>
-
                 </div>
+            </div>
 
-                
-              <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title">Recycled percentage in terms of material</div>
+                        <div class="card-title">Carbon Footprint Saved</div>
                     </div>
                     <div class="card-body">
                         <div class="chart-container">
@@ -80,172 +77,15 @@
                         </div>
                     </div>
                 </div>
-              </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">Airbus</div>
-                    </div>
-                    <div class="card-body">
-                        <div class="chart-container">
-                            <canvas id="multipleBarChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-
-                
             </div>
-            <!-- <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">Multiple Bar Chart</div>
-                    </div>
-                    <div class="card-body">
-                        <div class="chart-container">
-                            <canvas id="multipleBarChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-
         </div>
     </div>
 </div>
-
 <!-- Specific JS goes HERE -->
 {% block javascripts %}
 
 <script src="/static/assets/js/setting-demo2.js"></script>
-	<script>
-		doughnutChart = document.getElementById('doughnutChart').getContext('2d');
-    
-
-	
-		var myDoughnutChart = new Chart(doughnutChart, {
-			type: 'doughnut',
-			data: {
-				datasets: [{
-					data: [0-10, 10-20, 20-30, 30-40, 40-50],
-					backgroundColor: ['#f3545d','#00D100', '#00FFFF', '#00FFFF']
-				}],
-
-				labels: [
-				'0-10',
-				'10-20',
-                '20-30',
-                '30-40',
-                '40-50'
-				]
-			},
-			options: {
-				responsive: true, 
-				maintainAspectRatio: false,
-				legend : {
-					position: 'bottom'
-				},
-				layout: {
-					padding: {
-						left: 20,
-						right: 20,
-						top: 20,
-						bottom: 20
-					}
-				}
-			}
-		});
-
-    var arr = {{array|safe}};
-    console.log(arr);
-
-        var myPieChart = new Chart(pieChart, {
-			type: 'pie',
-			data: {
-				datasets: [{
-					data: [arr],
-					backgroundColor :["#1d7af3","#f3545d","#fdaf4b", "#00FFFF"],
-					borderWidth: 0
-				}],
-				labels: ['Aluminium', 'Steel', 'Titanium', 'Composite'] 
-			},
-			options : {
-				responsive: true, 
-				maintainAspectRatio: false,
-				legend: {
-					position : 'bottom',
-					labels : {
-						fontColor: 'rgb(154, 154, 154)',
-						fontSize: 11,
-						usePointStyle : true,
-						padding: 20
-					}
-				},
-				pieceLabel: {
-					render: 'percentage',
-					fontColor: 'white',
-					fontSize: 14,
-				},
-				tooltips: false,
-				layout: {
-					padding: {
-						left: 20,
-						right: 20,
-						top: 20,
-						bottom: 20
-					}
-				}
-			}
-		})
-        
-        console.log(myPieChart);
-        var myMultipleBarChart = new Chart(multipleBarChart, {
-			type: 'bar',
-			data: {
-				labels: ["Carbon Footprint", "Water Usage", "Landfall waste", "Energy consumption", "Toxicity score"],
-				datasets : [{
-					label: "New",
-					backgroundColor: '#59d05d',
-					borderColor: '#59d05d',
-					data: [95, 100, 112, 101, 144],
-				},{
-					label: "Old",
-					backgroundColor: '#fdaf4b',
-					borderColor: '#fdaf4b',
-					data: [145, 256, 244, 233, 266],
-				}, {
-					label: "Diff",
-					backgroundColor: '#177dff',
-					borderColor: '#177dff',
-					data: [185, 279, 273, 287, 234],
-				}],
-			},
-			options: {
-				responsive: true, 
-				maintainAspectRatio: false,
-				legend: {
-					position : 'bottom'
-				},
-				title: {
-					display: true,
-					text: 'Traffic Stats'
-				},
-				tooltips: {
-					mode: 'index',
-					intersect: false
-				},
-				responsive: true,
-				scales: {
-					xAxes: [{
-						stacked: true,
-					}],
-					yAxes: [{
-						stacked: true
-					}]
-				}
-			}
-		});
-
-</script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Retrieve the array data from the Django template variable
@@ -263,10 +103,13 @@
                     backgroundColor: [
                         '#1d7af3',
                         '#f3545d',
-                        '#fdaf4b'
+                        '#fdaf4b',
+                        '#f4b',
+                        '#00FF00'
+
                     ]
                 }],
-                labels: ['Label 1', 'Label 2', 'Label 3']
+                labels: ['10 Years', '20 Years', '30 Years','40 Years','50 Years']
             },
             options: {
                 responsive: true
@@ -274,7 +117,7 @@
         });
     });
 </script>
-	
+    
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>

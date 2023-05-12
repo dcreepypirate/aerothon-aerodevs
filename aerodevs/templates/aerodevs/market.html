@@ -34,7 +34,11 @@
           Age: {{pro.age}}
           Manufacturer: {{pro.manufacturer}} <br/>
           Remanufacturing Potential: {{pro.Remanufacturing_Potential}}<br/> <br/>
-          <a href="#" class="btn btn-primary">Buy Now</a>
+          {% if pro.is_Sold %}
+          <a href="#" class="btn btn-secondary" disabled>Sold out</a>
+            {% else %}
+          <a href="{% url 'buy' pro.part_id %}" class="btn btn-primary">Buy Now</a>
+          {% endif %}
         </div>
       </div>
     </div>
