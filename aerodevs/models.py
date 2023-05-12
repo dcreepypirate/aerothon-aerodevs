@@ -31,6 +31,7 @@ class Product(models.Model):
     Remanufacturing_Potential = models.FloatField(default=0)
     is_Sold = models.BooleanField(default=False)
     #manufacturer = models.ForeignKey('manufacturer', on_delete=models.CASCADE)
+    Percentage_recycled = models.FloatField(default=0.0)
     
     def __str__(self):
         return self.part_name

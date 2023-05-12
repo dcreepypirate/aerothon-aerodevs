@@ -11,5 +11,6 @@ urlpatterns = [
     path("market", views.market, name='market'),
     path("buy/<int:part_id>", views.buy, name='buy'),
 
+    path("dashboard", views.dashboard, name='dashboard')
 
 ]
