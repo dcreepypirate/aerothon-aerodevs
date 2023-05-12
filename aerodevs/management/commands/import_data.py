@@ -10,6 +10,8 @@ class Command(BaseCommand):
 		my_file = kwargs['file']
 		df = pd.read_excel(my_file)
 		df = df.iloc[:21]
+		df['Percentage_recycled'] = (df['Recycling Rate (%)']*df['Remanufacturing Potential']*df['Renewable Material Content (%)'])/(len(df.index)*10000)
+
 		df = df[['Part Name', 'Material Composition', 'Age (years)', 
 		'Manufacturer',
 		'New Parts Carbon Footprint (kg CO2e)', 
@@ -18,7 +20,8 @@ class Command(BaseCommand):
 		'Renewable Material Content (%)',
 		'Carbon Footprint Saved (kg CO2e)',
 		'Energy Consumption Saved (kWh)',
-		'Remanufacturing Potential (%)'
+		'Remanufacturing Potential (%)',
+		'Percentage_recycled'
 		]]
 
 		mapping = {'Part Name': 'part_name', 
@@ -31,7 +34,8 @@ class Command(BaseCommand):
 		'Renewable Material Content (%)':'Renewable_Material_Content',
 		'Carbon Footprint Saved (kg CO2e)':'Carbon_Footprint_Saved',
 		'Energy Consumption Saved (kWh)': 'Energy_Consumption_Saved',
-		'Remanufacturing Potential (%)': 'Remanufacturing_Potential'
+		'Remanufacturing Potential (%)': 'Remanufacturing_Potential',
+		'Percentage_recycled':'Percentage_recycled'
 		}
 		df = df.rename(columns=mapping)
 
@@ -47,7 +51,8 @@ class Command(BaseCommand):
     			Renewable_Material_Content =row[7],
     			Carbon_Footprint_Saved =row[8],
     			Energy_Consumption_Saved =row[9],
-    			Remanufacturing_Potential =row[10]
+    			Remanufacturing_Potential =row[10],
+    			Percentage_recycled=row[11]
 				)
 			
 		

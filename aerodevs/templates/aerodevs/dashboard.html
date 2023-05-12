@@ -2,6 +2,8 @@
 
 {% block content %}
 
+{{value}}
+
   <div class="dropdown">
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Part Name
@@ -26,7 +28,10 @@
               Material: {{pro.material}} <br/>
               Age: {{pro.age}} <br/>
               Manufacturer: {{pro.manufacturer}} <br/>
-              Remanufacturing_Potential: {{pro.Remanufacturing_Potential}}<br/> <br/>
+              Remanufacturing_Potential: {{pro.Remanufacturing_Potential}}
+              <br/>
+              Percentage_recycled: {{pro.Percentage_recycled}}
+              <br/> <br/>
               <a href="#" class="btn btn-primary">Buy Now</a>
             </div>
           </div>
