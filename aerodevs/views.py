@@ -9,9 +9,9 @@ from django import forms
 from django.conf import settings
 from django.shortcuts import redirect
 from .models import Product
-
-# import models
 from .models import User
+#from django.db.models import Sum
+
 
 def market(request):
     product = Product.objects.all()#.order_by('-age')
@@ -87,4 +87,10 @@ def register(request):
     else:
         return render(request, "aerodevs/register.html")
 
+def dashboard(request):
+    product = Product.objects.all()#.order_by('-age')
+    #value = (Product.objects.aggregate(Sum('Percentage_recycled'))['Percentage_recycled__sum'])*100
+    part_name_filter = Product.objects.values_list('part_name', flat=True).distinct()
+    context = {'product': product, 'part_name_filter':part_name_filter, 'value':value}
+    return render(request, 'aerodevs/dashboard.html', context)
 

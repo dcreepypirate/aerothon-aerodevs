@@ -1,3 +1,49 @@
+<<<<<<< HEAD
+<<<<<<< HEAD
+{% extends 'aerodevs/home.html' %}
+
+{% block content %}
+
+{{value}}
+
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Part Name
+    </button>
+    {% if part_name_filter %}
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      {% for name in part_name_filter %}
+        <a class="dropdown-item" href="#">{{name}}</a>
+      {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+
+  <!-- Page Content -->
+    {% for pro in product %}
+    <div class="container-fluid mt-3">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{pro.part_name}}</h5>
+              Material: {{pro.material}} <br/>
+              Age: {{pro.age}} <br/>
+              Manufacturer: {{pro.manufacturer}} <br/>
+              Remanufacturing_Potential: {{pro.Remanufacturing_Potential}}
+              <br/> <br/>
+              <a href="#" class="btn btn-primary">Buy Now</a>
+            </div>
+          </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}
+
+=======
+<h1>Welcome to dashboard</h1>
+>>>>>>> e035e483a666f3d2e7e0c7a4eeaae2c118d2cdae
+=======
 {% extends "aerodevs/layout.html" %}
 
 {% block title %} Dashboard {% endblock title %}
@@ -263,3 +309,4 @@
 
 
 {% endblock javascripts %}
+>>>>>>> ff368c2cef502e07dead73373078bd1818d7be83
