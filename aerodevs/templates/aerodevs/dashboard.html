@@ -18,13 +18,20 @@
 <!-- Page Content -->
 <div class="container-fluid mt-3">
   <div class="row">
-    {% for pro in product %}
+    {% for pro in product %} 
     <div class="col-md-4">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">{{pro.part_name}}</h5>
+          <h5 class="card-title">
+            {{pro.part_name}}
+            {% if pro.Remanufacturing_Potential < 60 %}
+            <span class="badge badge-sm badge-success">Recycle</span>
+            {% else %}
+            <span class="badge badge-sm badge-warning">Remanufacture</span>
+            {% endif %}
+            <br/></h5>
           Material: {{pro.material}} <br/>
-          Age: {{pro.age}} <br/>
+          Age: {{pro.age}}
           Manufacturer: {{pro.manufacturer}} <br/>
           Remanufacturing Potential: {{pro.Remanufacturing_Potential}}<br/> <br/>
           <a href="#" class="btn btn-primary">Buy Now</a>
