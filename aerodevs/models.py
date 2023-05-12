@@ -14,6 +14,7 @@ class User(AbstractUser):
     role = models.CharField(max_length=1,choices = LOGIN_TYPE,null=True)
 
 class Product(models.Model):
+    part_id = models.AutoField(primary_key=True)
     part_name = models.CharField(max_length=100)
     material = models.CharField(max_length=100)
     age = models.IntegerField()
@@ -28,6 +29,8 @@ class Product(models.Model):
     Carbon_Footprint_Saved = models.IntegerField(default=0)
     Energy_Consumption_Saved = models.IntegerField(default=0)
     Remanufacturing_Potential = models.FloatField(default=0)
+    is_Sold = models.BooleanField(default=False)
+    #manufacturer = models.ForeignKey('manufacturer', on_delete=models.CASCADE)
     Percentage_recycled = models.FloatField(default=0.0)
     
     def __str__(self):
