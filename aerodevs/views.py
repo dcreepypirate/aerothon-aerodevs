@@ -8,6 +8,7 @@ from django.urls import reverse
 from django import forms
 from django.conf import settings
 from django.shortcuts import redirect
+from .models import Product
 
 # import models
 from .models import User
@@ -79,4 +80,9 @@ def register(request):
         return render(request, "aerodevs/register.html")
 
 
+def dashboard(request):
+    product = Product.objects.all()#.order_by('-age')
+    part_name_filter = Product.objects.values_list('part_name', flat=True).distinct()
+    context = {'product': product, 'part_name_filter':part_name_filter}
+    return render(request, 'aerodevs/dashboard.html', context)
 
