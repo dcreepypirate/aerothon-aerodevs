@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 {% extends 'aerodevs/home.html' %}
 
 {% block content %}
@@ -42,3 +43,270 @@
 =======
 <h1>Welcome to dashboard</h1>
 >>>>>>> e035e483a666f3d2e7e0c7a4eeaae2c118d2cdae
+=======
+{% extends "aerodevs/layout.html" %}
+
+{% block title %} Dashboard {% endblock title %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="content">
+    <div class="page-inner">
+        <!-- Card -->
+        <h4 class="page-title">Dashboard</h4>
+        <div class="row">
+            <div class="col-sm-6 col-md-4">
+                <div class="card card-stats card-primary card-round">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="icon-big text-center">
+                                    <i class="flaticon-users"></i>
+                                </div>
+                            </div>
+                            <div class="col-7 col-stats">
+                                <div class="numbers">
+                                    <p class="card-category">Percentage of Recycled/Repurposed </p>
+                                    <h4 class="card-title">37%</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="card card-stats card-success card-round">
+                    <div class="card-body ">
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="icon-big text-center">
+                                    <i class="flaticon-analytics"></i>
+                                </div>
+                            </div>
+                            <div class="col-7 col-stats">
+                                <div class="numbers">
+                                    <p class="card-category">Sales</p>
+                                    <h4 class="card-title">$ 1,345</h4>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="card card-stats card-secondary card-round">
+                    <div class="card-body ">
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="icon-big text-center">
+                                    <i class="flaticon-success"></i>
+                                </div>
+                            </div>
+                            <div class="col-7 col-stats">
+                                <div class="numbers">
+                                    <p class="card-category">Order</p>
+                                    <h4 class="card-title">576</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Percentage of total recycled parts in terms of age range</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="doughnutChart" style="width: 50%; height: 50%"></canvas>
+                        </div>
+                    </div>
+
+                </div>
+
+                
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Recycled percentage in terms of material</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="pieChart" style="width: 50%; height: 50%"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Airbus</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="multipleBarChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div>
+            <!-- <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Multiple Bar Chart</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="multipleBarChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+<script src="/static/assets/js/setting-demo2.js"></script>
+	<script>
+		doughnutChart = document.getElementById('doughnutChart').getContext('2d');
+    
+
+	
+		var myDoughnutChart = new Chart(doughnutChart, {
+			type: 'doughnut',
+			data: {
+				datasets: [{
+					data: [0-10, 10-20, 20-30, 30-40, 40-50],
+					backgroundColor: ['#f3545d','#00D100', '#00FFFF', '#00FFFF']
+				}],
+
+				labels: [
+				'0-10',
+				'10-20',
+                '20-30',
+                '30-40',
+                '40-50'
+				]
+			},
+			options: {
+				responsive: true, 
+				maintainAspectRatio: false,
+				legend : {
+					position: 'bottom'
+				},
+				layout: {
+					padding: {
+						left: 20,
+						right: 20,
+						top: 20,
+						bottom: 20
+					}
+				}
+			}
+		});
+
+        var myPieChart = new Chart(pieChart, {
+			type: 'pie',
+			data: {
+				datasets: [{
+					data: [50, 35, 15, 20],
+					backgroundColor :["#1d7af3","#f3545d","#fdaf4b", "#00FFFF"],
+					borderWidth: 0
+				}],
+				labels: ['Aluminium', 'Steel', 'Titanium', 'Composite'] 
+			},
+			options : {
+				responsive: true, 
+				maintainAspectRatio: false,
+				legend: {
+					position : 'bottom',
+					labels : {
+						fontColor: 'rgb(154, 154, 154)',
+						fontSize: 11,
+						usePointStyle : true,
+						padding: 20
+					}
+				},
+				pieceLabel: {
+					render: 'percentage',
+					fontColor: 'white',
+					fontSize: 14,
+				},
+				tooltips: false,
+				layout: {
+					padding: {
+						left: 20,
+						right: 20,
+						top: 20,
+						bottom: 20
+					}
+				}
+			}
+		})
+        
+        
+        var myMultipleBarChart = new Chart(multipleBarChart, {
+			type: 'bar',
+			data: {
+				labels: ["Carbon Footprint", "Water Usage", "Landfall waste", "Energy consumption", "Toxicity score"],
+				datasets : [{
+					label: "New",
+					backgroundColor: '#59d05d',
+					borderColor: '#59d05d',
+					data: [95, 100, 112, 101, 144],
+				},{
+					label: "Old",
+					backgroundColor: '#fdaf4b',
+					borderColor: '#fdaf4b',
+					data: [145, 256, 244, 233, 266],
+				}, {
+					label: "Diff",
+					backgroundColor: '#177dff',
+					borderColor: '#177dff',
+					data: [185, 279, 273, 287, 234],
+				}],
+			},
+			options: {
+				responsive: true, 
+				maintainAspectRatio: false,
+				legend: {
+					position : 'bottom'
+				},
+				title: {
+					display: true,
+					text: 'Traffic Stats'
+				},
+				tooltips: {
+					mode: 'index',
+					intersect: false
+				},
+				responsive: true,
+				scales: {
+					xAxes: [{
+						stacked: true,
+					}],
+					yAxes: [{
+						stacked: true
+					}]
+				}
+			}
+		});
+	</script>
+
+
+{% endblock javascripts %}
+>>>>>>> ff368c2cef502e07dead73373078bd1818d7be83
