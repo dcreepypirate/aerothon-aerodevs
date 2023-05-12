@@ -1,7 +1,7 @@
 
 # AeroGreen
 
-**A that platform enables seamless communication and collaboration among aircraft manufacturers, airlines, and recycling facilities, fostering a cooperative ecosystem for sustainable component management.**
+**A platform that enables seamless communication and collaboration among aircraft manufacturers, airlines, and recycling facilities, fostering a cooperative ecosystem for sustainable component management.**
 
 ## Prerequisites
 
