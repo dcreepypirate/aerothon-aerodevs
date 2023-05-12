@@ -17,7 +17,7 @@ def market(request):
     product = Product.objects.all()#.order_by('-age')
     part_name_filter = Product.objects.values_list('part_name', flat=True).distinct()
     context = {'product': product, 'part_name_filter':part_name_filter}
-    return render(request, 'aerodevs/market .html', context)
+    return render(request, 'aerodevs/market.html', context)
 
 
 
