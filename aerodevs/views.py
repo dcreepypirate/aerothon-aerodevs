@@ -25,6 +25,34 @@ def market(request):
     return render(request, 'aerodevs/market.html', context)
 
 
+def dashboard(request):
+    product = Product.objects.all()  # .order_by('-age')
+    value = round((Product.objects.aggregate(Sum('Percentage_recycled'))[
+                  'Percentage_recycled__sum'])*100, 2)
+    # no_rows = Product.objects.filter(username='myname', status=0).count()
+    one = Product.objects.filter(age__gte=0, age__lte=10).count()
+    two = Product.objects.filter(age__gte=10, age__lte=20).count()
+    three = Product.objects.filter(age__gte=20, age__lte=30).count()
+    four = Product.objects.filter(age__gte=30, age__lte=40).count()
+    five = Product.objects.filter(age__gte=40, age__lte=50).count()
+
+    array = [one, two, three, four, five]
+
+    manufacturers = ['Boeing', 'Embraer', 'Cessna', 'Gulfstream', 'Airbus']
+    carbonarray = []
+
+    for manufacturer in manufacturers:
+        total_carbon_saved = Product.objects.filter(manufacturer=manufacturer).aggregate(
+            Sum('Carbon_Footprint_Saved'))['Carbon_Footprint_Saved__sum']
+        carbonarray.append(total_carbon_saved or 0)
+
+    part_name_filter = Product.objects.values_list(
+        'part_name', flat=True).distinct()
+    context = {'product': product, 'part_name_filter': part_name_filter, 'value': value, 'one': one, 'array': array,
+               'carbon': carbonarray}
+    return render(request, 'aerodevs/dashboard.html', context)
+
+
 @login_required
 def index(request):
 
@@ -38,7 +66,7 @@ def index(request):
         return redirect(market)
         
     else:
-        return render(request, "aerodevs/dashboard.html")
+        return redirect(dashboard)
 
 
 def buy(request,part_id):
@@ -103,28 +131,5 @@ def register(request):
     else:
         return render(request, "aerodevs/register.html")
 
-def dashboard(request):
-    product = Product.objects.all()#.order_by('-age')
-    value = round((Product.objects.aggregate(Sum('Percentage_recycled'))['Percentage_recycled__sum'])*100, 2)
-    #no_rows = Product.objects.filter(username='myname', status=0).count()
-    one = Product.objects.filter(age__gte=0, age__lte=10).count()
-    two = Product.objects.filter(age__gte=10, age__lte=20).count()
-    three = Product.objects.filter(age__gte=20, age__lte=30).count()
-    four = Product.objects.filter(age__gte=30, age__lte=40).count()
-    five = Product.objects.filter(age__gte=40, age__lte=50).count()
 
-    array = [one, two, three, four, five]
-
-    manufacturers = ['Boeing', 'Embraer', 'Cessna', 'Gulfstream','Airbus']
-    carbonarray = []
-
-    for manufacturer in manufacturers:
-        total_carbon_saved = Product.objects.filter(manufacturer=manufacturer).aggregate(Sum('Carbon_Footprint_Saved'))['Carbon_Footprint_Saved__sum']
-        carbonarray.append(total_carbon_saved or 0)
-
-    
-    part_name_filter = Product.objects.values_list('part_name', flat=True).distinct()
-    context = {'product': product, 'part_name_filter':part_name_filter, 'value':value, 'one':one, 'array':array, 
-    'carbon':carbonarray}
-    return render(request, 'aerodevs/dashboard.html', context)
 
