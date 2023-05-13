@@ -1,0 +1,391 @@
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:hover {
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+
+/******************************** Nav Section *********************************************/
+.navbar {
+    padding: 1% 5% 1%;
+}
+
+.glow-button:hover {
+    text-shadow: 1px 1px;
+
+}
+
+.navbar-item {
+    padding: 0 18px;
+}
+
+/******************************** Title Section *********************************************/
+
+.container-fluid {
+
+    position: absolute;
+
+
+}
+
+.title {
+    color: white;
+    font-size: 3.5rem;
+}
+
+.register {
+    display: flex;
+    gap: 20px;
+    padding: 0;
+    text-decoration: none;
+}
+
+.login-button {
+    padding: 12.5px 26px;
+}
+
+.title-section {
+    background-image: url("../images/plane1.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 5% 5% 30%;
+
+    overflow:auto;
+
+}
+
+/****************************Introduction********************/
+.article-right {
+    display: flex;
+    height: 450px;
+    flex-flow: row wrap;
+    background-color: #323232;
+    justify-content: flex-end;
+
+}
+
+.article-heading {
+    padding: 1% 2% 1%;
+    background-color: #fff;
+    width: 60%;
+    margin-right: 1px;
+    text-align: left;
+    line-height: 75px;
+    font-size: 3.5rem;
+    border: #19aa8d solid 10px;
+    border-bottom: #fff;
+    position: relative;
+    bottom: 50px;
+
+}
+
+.article-content {
+    background-color: #fff;
+    padding: 1% 2% 1%;
+    width: 60%;
+    height: 100%;
+    margin-right: 1px;
+    text-align: left;
+    line-height: 2rem;
+    font-size: 1.5rem;
+    border: #19aa8d solid 10px;
+    border-top: #fff;
+    position: relative;
+    bottom: 50px;
+    opacity: 90%;
+}
+
+@media (max-width:1028px) {
+    .article-heading {
+        padding: 2% 3% 2%;
+        background-color: #fff;
+        width: 80%;
+        margin-right: 1px;
+        text-align: left;
+        line-height: 75px;
+        font-size: 3.5rem;
+        border: #19aa8d solid 10px;
+        border-bottom: #fff;
+
+    }
+
+    .article-content {
+        background-color: #fff;
+        padding: 2% 3% 2%;
+        width: 80%;
+        height: 100%;
+        margin-right: 1px;
+        text-align: left;
+        line-height: 2rem;
+        font-size: 1.5rem;
+        border: #19aa8d solid 10px;
+        border-top: #fff;
+        opacity: 90%;
+    }
+
+    .article-right {
+        display: flex;
+        height: 550px;
+        flex-flow: row wrap;
+        background-color: #323232;
+        justify-content: flex-end;
+
+    }
+
+}
+
+/**************************** Filler ********************************/
+.filler{
+    background-image: url("../images/plane2.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    width: 100%;
+    height: 100%;
+
+    padding: 5% 5% 30%;
+}
+@media (max-width:1028px) {
+    .filler{
+    background-image: url("../images/plane2.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    width: 100%;
+    height: 450px;
+
+    padding: 10% 5% 40%;
+}
+
+}
+
+/****************************Services ********************************/
+#services {
+    background-color: #F1F6F9;
+    color: #fff;
+    text-align: center;
+    color: #323232;
+}
+
+.service-image {
+    width: 15%;
+    margin: 40px;
+}
+.carousel{
+    height: 500px;
+}
+
+.carousel-item {
+    padding: 3% 15% 7%;
+}
+@media (max-width:1028px) {
+    .service-image {
+    border-radius: 100%;
+    margin: 40px;
+}
+    .carousel-item {
+    padding: 10% 15% 2%;
+}
+}
+
+/******************************Join************************************/
+#join-us{
+    background-image: url("../images/turb.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 550px;
+    text-align: center;
+    color: #e1e1e1;
+    padding-top: 30px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3,220px);
+  grid-template-rows: repeat(2,220px);
+  gap: 10px;
+justify-content: center;
+
+}
+.grid-item{
+    background-color: #179b81;
+}
+.brand-logo{
+    width: 200px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 50px;
+    padding-left: 15px;
+
+}
+
+@media (max-width:1028px) {
+    .grid-container {
+  display: grid;
+  grid-template-columns: repeat(3,100px);
+  grid-template-rows: repeat(2,100px);
+  gap: 10px;
+justify-content: center;
+
+}
+.grid-item{
+    background-color: #179b81;
+}
+.brand-logo{
+    width: 100px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding:25px 2px
+
+}
+
+#join-us{
+    background-image: url("../images/turb.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 350px;
+    text-align: center;
+    color: #e1e1e1;
+    padding-top: 30px;
+}
+}
+
+/**************************** Sign-in ********************************/
+.form-control,
+.form-control:focus,
+.input-group-addon {
+    border-color: #e1e1e1;
+}
+
+.form-control,
+.btn {
+    border-radius: 3px;
+}
+
+.signup-form {
+    width: 390px;
+    margin: 0 auto;
+    padding: 100px 0;
+}
+
+.signup-form form {
+    color: #999;
+    border-radius: 3px;
+    margin-bottom: 15px;
+    background: #fff;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+}
+
+.signup-form h2 {
+    color: #333;
+    font-weight: bold;
+    margin-top: 0;
+}
+
+.signup-form hr {
+    margin: 0 -30px 20px;
+}
+
+.signup-form .form-group {
+    margin-bottom: 20px;
+}
+
+.signup-form label {
+    font-weight: normal;
+    font-size: 13px;
+}
+
+.signup-form .form-control {
+    min-height: 38px;
+    box-shadow: none !important;
+}
+
+.signup-form .input-group-addon {
+    max-width: 42px;
+    text-align: center;
+}
+
+.signup-form input[type="checkbox"] {
+    margin-top: 2px;
+}
+
+.signup-form .btn {
+    font-size: 16px;
+    font-weight: bold;
+    background: #19aa8d;
+    border: none;
+    min-width: 140px;
+}
+
+.signup-form .btn:hover,
+.signup-form .btn:focus {
+    background: #179b81;
+    outline: none;
+}
+
+.signup-form a {
+
+    text-decoration: underline;
+}
+
+.signup-form a:hover {
+    text-decoration: none;
+}
+
+.signup-form form a {
+    color: #19aa8d;
+    text-decoration: none;
+}
+
+.signup-form form a:hover {
+    text-decoration: underline;
+}
+
+.signup-form .fa {
+    font-size: 21px;
+}
+
+.signup-form .fa-paper-plane {
+    font-size: 18px;
+}
+
+.signup-form .fa-check {
+    color: #fff;
+    left: 17px;
+    top: 18px;
+    font-size: 7px;
+    position: absolute;
+}
+
+
+@media (max-width:1028px) {
+    .container-fluid {
+        position: relative;
+        background-color: #323232;
+    }
+
+    .title {
+        padding-top: 2%;
+        padding-bottom: 5%;
+        text-align: center;
+
+    }
+
+    .register {
+        padding-top: 30%;
+        display: flex;
+        justify-content: center;
+    }
+
+}
