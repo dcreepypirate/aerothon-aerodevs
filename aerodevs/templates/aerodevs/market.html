@@ -1,4 +1,4 @@
-{% extends 'aerodevs/layout.html' %}
+{% extends "aerodevs/layout.html" %}
 
 {% block content %}
 
@@ -16,6 +16,11 @@
 </div>
 
 <!-- Page Content -->
+<div styles="margin:600px">
+  <p>history</p>
+  <a href="{% url 'history' %}" class="btn btn-primary">History</a>
+
+</div>
 <div class="container-fluid mt-3">
   <div class="row">
     {% for pro in product %} 

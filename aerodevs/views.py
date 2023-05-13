@@ -9,9 +9,19 @@ from django import forms
 from django.conf import settings
 from django.shortcuts import redirect
 from .models import Product
-from .models import User
+from .models import User,Order
 from django.db.models import Sum
 from json import dumps
+
+
+def history(request):
+    current_user = User.objects.get(username=request.user)
+    all_orders = Order.objects.filter(buyer=current_user)
+    return render(request,"aerodevs/history.html",{
+        "orders":all_orders
+    })
+
+
 
 
 def home(request):
@@ -73,6 +83,9 @@ def buy(request,part_id):
     part = Product.objects.get(part_id=part_id)
     part.is_Sold=True
     part.save()
+    current_user = User.objects.get(username=request.user)
+    order = Order(buyer=current_user,part=part)
+    order.save()
     return redirect("/market")
 
 
