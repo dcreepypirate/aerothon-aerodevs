@@ -2,8 +2,28 @@
 
 {% block content %}
 
+<!-- <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Part Name
+  </button>
+  {% if part_name_filter %}
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    {% for name in part_name_filter %}
+    <a class="dropdown-item" href="#">{{name}}</a>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div> -->
+<style>
+    h1 {
+        padding-top: 70px;
+    }
+</style>
 <!-- Page Content -->
+<h1>Search Results</h1>
+
 <br/> <br/>
+
 <div class="container-fluid mt-3">
   <div class="row">
     {% for pro in product %} 
@@ -21,7 +41,6 @@
           Material: {{pro.material}} <br/>
           Age: {{pro.age}} <br/>
           Manufacturer: {{pro.manufacturer}} <br/>
-
           Remanufacturing Potential: {{pro.Remanufacturing_Potential | floatformat:2}}<br/> <br/>
           {% if pro.is_Sold %}
           <a href="#" class="btn btn-secondary" disabled>Sold out</a>

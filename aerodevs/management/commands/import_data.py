@@ -9,7 +9,7 @@ class Command(BaseCommand):
 	def handle(self, *args, **kwargs):
 		my_file = kwargs['file']
 		df = pd.read_excel(my_file)
-		df = df.iloc[:21]
+		df = df
 		df['Percentage_recycled'] = (df['Recycling Rate (%)']*df['Remanufacturing Potential']*df['Renewable Material Content (%)'])/(len(df.index)*10000)
 
 		df = df[['Part Name', 'Material Composition', 'Age (years)', 

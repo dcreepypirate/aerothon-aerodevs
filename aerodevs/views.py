@@ -27,6 +27,7 @@ def market(request):
 
 def dashboard(request):
     product = Product.objects.all()  # .order_by('-age')
+    part_name_filter = Product.objects.values_list('part_name', flat=True).distinct()
     value = round((Product.objects.aggregate(Sum('Percentage_recycled'))[
                   'Percentage_recycled__sum'])*100, 2)
     # no_rows = Product.objects.filter(username='myname', status=0).count()
@@ -40,16 +41,21 @@ def dashboard(request):
 
     manufacturers = ['Boeing', 'Embraer', 'Cessna', 'Gulfstream', 'Airbus']
     carbonarray = []
+    energy_saved = []
 
     for manufacturer in manufacturers:
         total_carbon_saved = Product.objects.filter(manufacturer=manufacturer).aggregate(
             Sum('Carbon_Footprint_Saved'))['Carbon_Footprint_Saved__sum']
         carbonarray.append(total_carbon_saved or 0)
 
-    part_name_filter = Product.objects.values_list(
-        'part_name', flat=True).distinct()
+        saved_energy = Product.objects.filter(manufacturer=manufacturer).aggregate(
+            Sum('Energy_Consumption_Saved'))['Energy_Consumption_Saved__sum']
+        energy_saved.append(saved_energy or 0)
+
+    part_name_filter = Product.objects.values_list('part_name', flat=True).distinct()
+
     context = {'product': product, 'part_name_filter': part_name_filter, 'value': value, 'one': one, 'array': array,
-               'carbon': carbonarray}
+               'carbon': carbonarray, 'energy_saved':energy_saved, 'part_name_filter':part_name_filter}
     return render(request, 'aerodevs/dashboard.html', context)
 
 
@@ -75,6 +81,13 @@ def buy(request,part_id):
     part.save()
     return redirect("/market")
 
+def search(request):
+    query = request.GET['search']
+    product = Product.objects.filter(part_name__icontains=query)
+    part_name_filter = Product.objects.values_list(
+        'part_name', flat=True).distinct()
+    context = {'product': product, 'part_name_filter': part_name_filter}
+    return render(request, 'aerodevs/search.html', context)
 
 
 

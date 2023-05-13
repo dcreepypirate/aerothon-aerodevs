@@ -25,7 +25,7 @@
         <div class="container-fluid">
             {% if request.user.is_authenticated %}
             <div class="collapse" id="search-nav">
-                <form class="navbar-left navbar-form nav-search mr-md-3" action="/viewPrescription/" method="post"	>
+                <form class="navbar-left navbar-form nav-search mr-md-3" action="/search" method="get"  >
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <button type="submit" class="btn btn-search pr-1">
