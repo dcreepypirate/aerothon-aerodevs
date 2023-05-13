@@ -35,3 +35,11 @@ class Product(models.Model):
     
     def __str__(self):
         return self.part_name
+
+
+class Order(models.Model):
+    buyer = models.ForeignKey(User, on_delete = models.CASCADE, related_name = "Buyer")
+    part = models.ForeignKey(Product,on_delete = models.CASCADE)
+
+    def __str__(self):
+        return f"{self.buyer.username}  - {self.part.part_name}"

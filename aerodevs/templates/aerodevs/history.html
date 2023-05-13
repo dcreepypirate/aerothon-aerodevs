@@ -1,0 +1,38 @@
+{% extends "aerodevs/layout.html" %}
+
+
+{% block title %}
+   History
+{% endblock %}
+
+{% block content %}
+<div style="margin-top:80px">
+    
+
+           <table class = "table">
+        
+         <tr>
+             <th>Buyer</th>
+             <th>Product</th>
+             <th>Age</th>
+             <th>Manufacturer</th>
+             <th>Material</th>
+             <th>Remanufacturing_Potential</th>
+
+        </tr>
+        {% for x in orders %}
+        <tr>
+            <td>{{ x.buyer.username }}</td>
+            <td>{{ x.part.part_name }}</td>
+            <td>{{ x.part.age }}</td>
+            <td>{{ x.part.manufacturer }}</td>
+            <td>{{ x.part.material }}</td>
+            <td>{{ x.part.Remanufacturing_Potential }}</td>
+
+        </tr>
+        </div>
+        {% endfor %}
+  </table>
+
+</div>
+{% endblock %}
